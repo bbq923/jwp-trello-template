@@ -1,6 +1,8 @@
 package next.web;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import next.domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,10 +15,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static io.restassured.RestAssured.given;
 
+/**
+ * Created by NEXT on 2017. 6. 29..
+ */
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HomeControllerTest {
-    private Logger log = LoggerFactory.getLogger(HomeControllerTest.class);
+public class ApiUserControllerTest {
+    private Logger log = LoggerFactory.getLogger(ApiUserControllerTest.class);
 
     @Value("${local.server.port}")
     private int serverPort;
@@ -28,14 +34,18 @@ public class HomeControllerTest {
     }
 
     @Test
-    public void home() throws Exception {
-        String body = given()
-            .when()
-                .get("/")
-            .then()
-                .statusCode(HttpStatus.OK.value())
-                    .extract().asString();
-        System.out.println("body " + body);
-    }
+    public void create() throws Exception {
+        User user = new User("userId", "password", "javajigi@slipp.net");
 
+        String body = given()
+            .contentType(ContentType.JSON)
+            .body(user)
+        .when()
+                .post("/api/users")
+        .then()
+            .statusCode(HttpStatus.CREATED.value())
+            .extract().asString();
+
+        log.debug("body : {}", body);
+    }
 }
