@@ -30,7 +30,7 @@ repositories {
 
 task buildDocker(type: Docker, dependsOn: build) {
     push = false
-    applicationName = "bbqq923/" + jar.baseName
+    applicationName = "bbq923/" + jar.baseName
     dockerfile = file('src/main/docker/Dockerfile')
     doFirst {
         copy {
