@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UserController {
 
-    @GetMapping("/login")
+    @GetMapping("/loginForm")
     public String loginPage() {
         return "login";
     }
@@ -19,5 +19,15 @@ public class UserController {
     @GetMapping("/form")
     public String signupPage() {
         return "signUp";
+    }
+
+    @GetMapping("/admin/test")
+    public String adminPage() {
+        return "login";
+    }
+
+    @GetMapping("/user/test")
+    public String userPage() {
+        return "login";
     }
 }

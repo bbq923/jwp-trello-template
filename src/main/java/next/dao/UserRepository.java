@@ -11,4 +11,5 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
     @Override
     <S extends User> List<S> save(Iterable<S> user);
+    User findByEmail(String email);
 }

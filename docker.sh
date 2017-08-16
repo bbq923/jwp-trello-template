@@ -11,5 +11,3 @@ docker-compose up -d
 #docker rm bbqtrello
 #docker run -d --name bbqtrello bbqtrello-docker
 #docker run -d --name bbqnginx --link bbqtrello -p 80:80 nginx:1.0.0
-
-
