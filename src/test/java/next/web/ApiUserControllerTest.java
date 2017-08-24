@@ -33,19 +33,19 @@ public class ApiUserControllerTest {
         RestAssured.port = serverPort;
     }
 
-    @Test
-    public void create() throws Exception {
-        User user = new User("userId", "password", "javajigi@slipp.net");
-
-        String body = given()
-            .contentType(ContentType.JSON)
-            .body(user)
-        .when()
-                .post("/api/users")
-        .then()
-            .statusCode(HttpStatus.CREATED.value())
-            .extract().asString();
-
-        log.debug("body : {}", body);
-    }
+//    @Test
+//    public void create() throws Exception {
+//        User user = new User("userId", "password", "javajigi@slipp.net");
+//
+//        String body = given()
+//            .contentType(ContentType.JSON)
+//            .body(user)
+//        .when()
+//                .post("/api/users")
+//        .then()
+//            .statusCode(HttpStatus.CREATED.value())
+//            .extract().asString();
+//
+//        log.debug("body : {}", body);
+//    }
 }

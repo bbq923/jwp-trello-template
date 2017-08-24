@@ -24,4 +24,8 @@ public class Role {
 
     @NonNull
     private String role;
+
+    public Role(String role) {
+
+    }
 }

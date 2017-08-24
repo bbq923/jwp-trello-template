@@ -42,15 +42,15 @@ task buildDocker(type: Docker, dependsOn: build) {
 }
 
 dependencies {
-    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.42'
+    compile('mysql:mysql-connector-java:5.1.42')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
     compile('pl.allegro.tech.boot:handlebars-spring-boot-starter:0.2.15')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.security.oauth:spring-security-oauth2')
+	compile('org.projectlombok:lombok')
     runtime('com.h2database:h2')
 	runtime('net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.1.0')
-	compile('org.projectlombok:lombok')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('io.rest-assured:rest-assured:3.0.3')
 }

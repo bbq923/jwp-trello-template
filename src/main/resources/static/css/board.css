@@ -71,8 +71,10 @@ header .header-wrapper ul li {
 
 }
 
-header .header-wrapper ul li a{
+header .header-wrapper ul li input {
 
+  background: none;
+  border: none;
   font-size: 1rem;
   display: inline-block;
   text-decoration: none;

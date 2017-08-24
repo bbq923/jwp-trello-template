@@ -37,7 +37,7 @@ public class AuthenticationEventListener {
         }
 
         OAuth2Authentication authentication = (OAuth2Authentication) event.getAuthentication();
-        authentication.getPrincipal();
+        Object principal = authentication.getPrincipal();
 
         Map<String, Object> map = (Map<String, Object>) authentication.getUserAuthentication().getDetails();
         log.debug("authentication details : {}", map);

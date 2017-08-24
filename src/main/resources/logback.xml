@@ -8,6 +8,7 @@
     </appender>
 
     <logger name="next" level="DEBUG" />
+    <logger name="lotto" level="DEBUG" />
 
     <root level="INFO">
         <appender-ref ref="STDOUT" />

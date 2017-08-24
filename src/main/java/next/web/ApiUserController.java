@@ -23,6 +23,8 @@ public class ApiUserController {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    RoleRepository roleRepository;
     @Resource(name = "passwordEncoder")
     PasswordEncoder passwordEncoder;
 
@@ -33,7 +35,9 @@ public class ApiUserController {
 
         user.encryptPassword(passwordEncoder);
 
-        log.debug("password encrypted : {}", user);
+        user.addRole(roleRepository.findByRole("USER"));
+
+        log.debug("user role assigned : {}", user);
 
         return userRepository.save(user);
     }

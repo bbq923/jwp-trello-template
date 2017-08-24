@@ -11,12 +11,12 @@ $(function() {
 
         var url = $(".signup-form").attr("action");
         console.log(url);
-        var userId = $("#user_id").val();
+        var userName = $("#user_name").val();
         var email = $("#email").val();
         var rawPassword = $("#password").val();
 
         var data = JSON.stringify({
-            "userId": userId,
+            "userName": userName,
             "email": email,
             "rawPassword": rawPassword
         });

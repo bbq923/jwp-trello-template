@@ -40,16 +40,24 @@ public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+//        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
     @Resource(name = "customUserDetailsService")
     private UserDetailsService userDetailsService;
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+//        http.csrf().disable();
+//        http.headers().frameOptions().disable();
         configureCsrf(http);
 
 //        http
@@ -70,6 +78,7 @@ public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
             .authorizeRequests()
+                .antMatchers("/", "/form").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().permitAll()
@@ -77,13 +86,17 @@ public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/loginForm")
                 .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/", true)
+                .defaultSuccessUrl("/boards", true)
                 .permitAll()
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and()
                 .logout()
+                .logoutUrl("/perform_logout")
+                .logoutSuccessUrl("/")
                 .permitAll();
+//                .and().exceptionHandling()
+//                .accessDeniedPage("/loginForm");
 
     }
 
@@ -102,12 +115,7 @@ public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //            .passwordEncoder(passwordEncoder());
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-            .ignoring()
-            .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
-    }
+
 
     @Configuration
     @EnableWebSecurity
@@ -118,6 +126,8 @@ public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         void configureCsrf(HttpSecurity http) throws Exception {
             log.info("enable csrf test profile");
+//            http.csrf().disable();
+//            http.headers().frameOptions().disable();
         }
     }
 

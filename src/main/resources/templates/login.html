@@ -24,8 +24,12 @@
         <h4>Login To Trello</h4>
 
         <form class="login-form" method="POST" action="/perform_login">
+            <input type="hidden"
+                   name="{{_csrf.parameterName}}"
+                   value="{{_csrf.token}}"/>
             <div class="row">
                 <div class="input-field col s12">
+
                     <input id="email" type="email" name="email" class="validate">
                     <label for="email">Email</label>
                 </div>
@@ -50,6 +54,5 @@
 
       <script type="text/javascript" src="./lib/jquery-2.2.0.min.js"></script>
       <script type="text/javascript" src="./lib/materialize.min.js"></script>
-      <script type="text/javascript" src="./js/login.js"></script>
     </body>
   </html>

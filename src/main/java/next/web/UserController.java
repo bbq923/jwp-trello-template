@@ -1,7 +1,13 @@
 package next.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -10,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class UserController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/loginForm")
     public String loginPage() {
@@ -21,13 +28,5 @@ public class UserController {
         return "signUp";
     }
 
-    @GetMapping("/admin/test")
-    public String adminPage() {
-        return "login";
-    }
 
-    @GetMapping("/user/test")
-    public String userPage() {
-        return "login";
-    }
 }
