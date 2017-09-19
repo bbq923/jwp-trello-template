@@ -20,6 +20,8 @@ import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.annotation.Resource;
 
@@ -77,11 +79,13 @@ public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .permitAll();
 
         http
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/", "/form").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
-                .anyRequest().permitAll()
+                .antMatchers("/board").hasRole("USER")
+                .antMatchers("/boards").hasRole("USER")
+//                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/loginForm")
@@ -128,6 +132,10 @@ public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             log.info("enable csrf test profile");
 //            http.csrf().disable();
 //            http.headers().frameOptions().disable();
+
+            http.csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("!/h2-console/**"))
+                    .and().headers().addHeaderWriter(new StaticHeadersWriter("X-Content-Security-Policy","script-src 'self'"))
+                    .frameOptions().disable();
         }
     }
 
@@ -141,6 +149,8 @@ public abstract class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         void configureCsrf(HttpSecurity http) throws Exception {
             log.info("disable csrf test profile");
             http.csrf().disable();
+
+            http.httpBasic();
         }
     }
 }

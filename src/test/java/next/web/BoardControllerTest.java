@@ -14,11 +14,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static io.restassured.RestAssured.given;
 
+/**
+ * Created by NEXT on 2017. 8. 29..
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
-public class HomeControllerTest {
-    private Logger log = LoggerFactory.getLogger(HomeControllerTest.class);
+public class BoardControllerTest {
+    private static final Logger log = LoggerFactory.getLogger(BoardControllerTest.class);
 
     @Value("${local.server.port}")
     private int serverPort;
@@ -30,15 +33,16 @@ public class HomeControllerTest {
     }
 
     @Test
-    public void home() throws Exception {
+    public void retrieve() {
         String body = given()
-                .auth().preemptive().basic("bbq@naver.com", "1234")
-                .when()
-                .get("/admin/page")
+                .auth().preemptive().basic("bbq@naver.com","1234")
+            .when()
+                .get("/boards")
             .then()
-                .statusCode(HttpStatus.OK.value())
-                    .extract().asString();
-        System.out.println("body " + body);
-    }
+                .statusCode(HttpStatus.CREATED.value())
+                .extract().asString();
 
+
+        log.debug("body : {}", body);
+    }
 }

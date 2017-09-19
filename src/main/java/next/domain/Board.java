@@ -26,11 +26,21 @@ public class Board {
 
     private String creator;
 
+    private String created;
+
     @NonNull
     private String name;
 
     public Board(String creator, String name) {
         this.creator = creator;
         this.name = name;
+    }
+
+    public Board(String name) {
+        this.name = name;
+    }
+
+    public Boolean matchCreator(User user) {
+        return this.creator.equals(user);
     }
 }

@@ -49,6 +49,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.security.oauth:spring-security-oauth2')
 	compile('org.projectlombok:lombok')
+    compile('org.flywaydb:flyway-core:4.2.0')
     runtime('com.h2database:h2')
 	runtime('net.rakugakibox.spring.boot:logback-access-spring-boot-starter:2.1.0')
     testCompile('org.springframework.boot:spring-boot-starter-test')
