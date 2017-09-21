@@ -2,6 +2,7 @@
 
 echo "=======SHELL SCRIPT PROCESS STARTS======="
 #git pull
+#make change in docker.sh
 ./gradlew buildDocker
 docker-compose -f src/main/docker/docker-compose.yml down
 docker-compose -f src/main/docker/docker-compose.yml up -d
