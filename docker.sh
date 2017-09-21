@@ -3,7 +3,7 @@
 git pull
 ./gradlew buildDocker
 docker-compose down
-docker-compose up -d
+docker-compose -f src/main/docker/docker-compose.yml up -d
 #cd ~/docker/nginx
 #docker build -t nginx:1.0.0 .
 #docker stop bbqnginx
