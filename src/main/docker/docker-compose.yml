@@ -17,10 +17,7 @@ services:
     db:
         image: mysql
         ports:
-            - target : 3306
-              published : 8000
-              protocol : tcp
-              mode : host
+            - "3306:8000"
         environment:
             MYSQL_ROOT_PASSWORD: 123456
             MYSQL_USER: bbq923
