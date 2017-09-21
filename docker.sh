@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "=======SHELL SCRIPT PROCESS STARTS======="
 git pull
 ./gradlew buildDocker
 docker-compose down
