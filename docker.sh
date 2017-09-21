@@ -3,7 +3,7 @@
 echo "=======SHELL SCRIPT PROCESS STARTS======="
 git pull
 ./gradlew buildDocker
-docker-compose down
+docker-compose -f src/main/docker/docker-compose.yml down
 docker-compose -f src/main/docker/docker-compose.yml up -d
 #cd ~/docker/nginx
 #docker build -t nginx:1.0.0 .
