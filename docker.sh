@@ -1,5 +1,6 @@
 #!/bin/bash
 
+git pull
 ./gradlew buildDocker
 docker-compose down
 docker-compose up -d

@@ -11,7 +11,7 @@ services:
     trello:
         image: bbq923/bbqtrello-docker
         links:
-            - db:db
+            - db:bbqmysql
         volumes:
             - ./trellobase:/trellobase
     db:
