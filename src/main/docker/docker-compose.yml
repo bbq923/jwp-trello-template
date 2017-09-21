@@ -1,0 +1,27 @@
+version: '3'
+services:
+    nginx:
+        depends_on:
+            - trello
+        image: bbq923/bbqnginx
+        links:
+            - trello:app
+        ports:
+            - "80:80"
+    trello:
+        image: bbq923/bbqtrello-docker
+        links:
+            - db:db
+        volumes:
+            - ./trellobase:/trellobase
+    db:
+        image: mysql
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456
+            MYSQL_USER: bbq923
+            MYSQL_PASSWORD: 123456
+            MYSQL_DATABASE: trellobase
+volumes:
+    trellobase:
