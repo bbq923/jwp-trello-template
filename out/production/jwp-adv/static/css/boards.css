@@ -53,8 +53,10 @@ header .header-wrapper li {
 
 }
 
-header .header-wrapper li a{
+header .header-wrapper li input {
 
+  background: none;
+  border: none;
   font-size: 1rem;
   display: inline-block;
   text-decoration: none;

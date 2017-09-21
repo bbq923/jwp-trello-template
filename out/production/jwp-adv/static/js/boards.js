@@ -21,15 +21,32 @@ var BOARDS = (function (window){
 	function createNewBoard(){
 
 		var boardName = $(".board-name").val();
+		var url = $(".add-board-form").attr("action");
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
 
 		if(boardName == ""){
 			$(".warning").css("display","block");
 			return;
 		}
 
-		// $.ajax({
-		//
-		// }).done(function(){
+
+		var data = JSON.stringify({
+			"name": boardName
+		});
+
+		console.log(header);
+		console.log(token);
+
+		$.ajax({
+			method: "post",
+			url: url,
+			data: data,
+            beforeSend: function(req) {
+                req.setRequestHeader(header, token)
+            },
+			contentType: "application/json"
+		}).done(function(){
 
             $(".warning").css("display","none");
             var str = Template.board.replace(/\{\{input-value\}\}/gi,boardName);
@@ -37,9 +54,9 @@ var BOARDS = (function (window){
             $("#modal").modal("close");
             $(".board-list").append(str);
 
-		// }).fail(function(){
-        //
-		// });
+		}).fail(function(){
+			alert("failed creating a board");
+		});
 
     }
 

@@ -1,6 +1,8 @@
 <html>
     <head>
       <meta charset="utf-8">
+      <meta name="_csrf" content="{{_csrf.token}}"/>
+      <meta name="_csrf_header" content="{{_csrf.headerName}}"/>
       <title>JWP Trello Login</title>
       <link type="text/css" rel="stylesheet" href="./lib/materialize.min.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="./css/login.css">
@@ -12,7 +14,7 @@
         <div class="header-wrapper">
             <a href="#" class="brand-logo">JWP Trello</a>
             <ul>
-              <li><a href="signUp.html">sign up</a></li>
+              <li><a href="/form">sign up</a></li>
             </ul>
         </div>
     </header>
@@ -21,16 +23,20 @@
 
         <h4>Login To Trello</h4>
 
-        <form class="login-form" method="POST">
+        <form class="login-form" method="POST" action="/perform_login">
+            <input type="hidden"
+                   name="{{_csrf.parameterName}}"
+                   value="{{_csrf.token}}"/>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="email" type="email" class="validate">
+
+                    <input id="email" type="email" name="email" class="validate">
                     <label for="email">Email</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="password" type="password" class="validate">
+                    <input id="password" type="password" name="password" class="validate">
                     <label for="password">Password</label>
                 </div>
             </div>
@@ -39,7 +45,7 @@
 
         <p class="alternatives-separator">or</p>
 
-        <a class="github-login waves-effect waves-light btn" href="#">
+        <a id="login-btn" class="github-login waves-effect waves-light btn" href="/login">
             <div class="github-icon"></div>
             <div class="github-login-text">github로 로그인</div>
         </a>
