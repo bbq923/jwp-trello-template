@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "=======SHELL SCRIPT PROCESS STARTS======="
-git pull origin master
+#git pull origin master
 ./gradlew buildDocker
 docker-compose -f src/main/docker/docker-compose.yml down
 docker-compose -f src/main/docker/docker-compose.yml up -d
